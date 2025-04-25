@@ -1,0 +1,35 @@
+name: Commit Changes
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  commit_changes:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up Git configuration
+      run: |
+        git config --global user.name "Your Name"
+        git config --global user.email "your-email@example.com"
+
+    - name: Make changes (example: touch a file)
+      run: |
+        echo "New changes made" > changes.txt
+        git add changes.txt
+
+    - name: Commit changes
+      run: |
+        git commit -m "Automated commit message"
+        
+    - name: Push changes
+      run: |
+        git push origin main
